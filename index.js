@@ -6,11 +6,11 @@ const core = require("@actions/core");
 
 /**
  * @param {NodeJS.ProcessEnv} env
- * @param {{issue: { body: string}}} eventPayload
+ * @param {string} body
  * @param {fs} fs
  * @param {core} core
  */
-async function run(env, eventPayload, fs, core) {
+async function run(env, body, fs, core) {
   let form = {};
   try {
     const templatePath = core.getInput("template-path");
@@ -56,7 +56,6 @@ async function run(env, eventPayload, fs, core) {
   }
 
   let result;
-  const body = eventPayload.issue.body || '';
   const idMapping = getIDsFromIssueTemplate(form);
   const idTypes = getIDTypesFromIssueTemplate(form);
 
@@ -173,9 +172,9 @@ async function run(env, eventPayload, fs, core) {
 // On GitHub Actions the `run` function is executed immediately.
 // `NODE_ENV` is set when running tests on GitHub Actions as part of CI.
 if (process.env.GITHUB_ACTIONS && process.env.NODE_ENV !== "test") {
-  const eventPayload = require(process.env.GITHUB_EVENT_PATH);
+  const body = core.getInput("issue-body");
 
-  run(process.env, eventPayload, fs, core, yaml);
+  run(process.env, body, fs, core);
 }
 
 module.exports.run = run;

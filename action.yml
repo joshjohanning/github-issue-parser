@@ -6,6 +6,9 @@ branding:
 inputs:
   template-path:
     description: 'Path to the issue form template file'
+  issue-body:
+    required: true
+    description: 'Issue body to parse'
 outputs:
   jsonString:
     description: 'JSON string'
