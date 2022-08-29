@@ -11,7 +11,11 @@ Use this action to convert issues into a unified JSON structure. Read the [Codel
     issue-body: ${{ github.event.issue.body }} # required
     template-path: .github/ISSUE_TEMPLATE/bug-report.yml # optional but recommended
 
-- run: echo '${{ steps.issue-parser.outputs.jsonString }}' > bug-details.json
+- run: cat ${HOME}/issue-parser-result.json
+
+- run: echo $FAVORITE_DISH
+  env:
+    FAVORITE_DISH: ${{ steps.issue-parser.outputs.issueparser_favorite_dish }}
 ```
 
 ## Example
@@ -60,6 +64,26 @@ The actions output will be
 }
 ```
 
+## Action outputs
+
+- `jsonString` - The entire output
+- `issueparser_<field_id>` - Access individual values
+
+
+Please take a look at GitHub's [Good practices for mitigating script injection attacks](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#good-practices-for-mitigating-script-injection-attacks) when using inline scripts. The examples blow are safe because they use intermediate environment variable as suggested by GitHub.
+
+```yaml
+- run: echo $JSON_STRING > output.json
+  env:
+    JSON_STRING: ${{ steps.issue-parser.outputs.jsonString }}
+```
+
+
+```yaml
+- run: echo $FAV_DISH
+  env:
+    FAV_DISH: ${{ steps.issue-parser.outputs.issueparser_favorite_dish }}
+```
 
 Want to learn more about this concept? Check out the [Codeless Contributions with GitHub Issue Forms](https://stefanbuck.com/blog/codeless-contributions-with-github-issue-forms) post on my blog.
 
