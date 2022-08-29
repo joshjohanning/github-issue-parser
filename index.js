@@ -11,6 +11,7 @@ const core = require("@actions/core");
  * @param {core} core
  */
 async function run(env, body, fs, core) {
+  body = body ?? ""
   let form = {};
   try {
     const templatePath = core.getInput("template-path");

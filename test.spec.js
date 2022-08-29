@@ -140,7 +140,7 @@ it("blank", () => {
   };
 
   // mock event payload
-  const eventPayload = require("./fixtures/blank/issue");
+  const eventPayload = null;
 
   // mock fs
   const fs = {
