@@ -1,20 +1,9 @@
-### Your contact details
+### What's your favorite dish?
 
-me@me.com
+Pizza
 
-### What happened?
+### What's your preferred color?
 
-A bug happened!
-
-### Version
-
-1.0.0
-
-### What browsers are you seeing the problem on?
-
-Chrome, Safari
-
-### Code of Conduct
-
-- [x] Never give up
-- [ ] Hot Dog is a Sandwich
+- [x] Red
+- [ ] Green
+- [x] Blue
